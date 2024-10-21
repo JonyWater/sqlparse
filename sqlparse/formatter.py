@@ -134,13 +134,17 @@ def validate_options(options):  # noqa: C901
     return options
 
 
-def build_filter_stack(stack, options):
+def build_filter_stack(stack, options, valdate=True):
     """Setup and return a filter stack.
 
     Args:
       stack: :class:`~sqlparse.filters.FilterStack` instance
       options: Dictionary with options validated by validate_options.
     """
+    # validate inputted options
+    if validate:
+       validate_options(options)
+
     # Token filter
     if options.get('keyword_case'):
         stack.preprocess.append(
